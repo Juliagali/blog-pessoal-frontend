@@ -119,7 +119,7 @@ function CadastroUsuario() {
                                 <Link to='/login' className='text=decorator-none'>
                                     <Button variant='contained' color='error'>Cancelar</Button>
                                 </Link>
-                                <Button variant='contained' color='primary'>Cadastrar</Button>
+                                <Button type='submit' variant='contained' color='primary'>Cadastrar</Button>
                             </Box>
                         </form>
                     </Grid>
