@@ -29,7 +29,7 @@ function Login() {
 
     useEffect(() => {
         if (token !== '') {
-            history('/home');
+            history('/Home');
         }
     }, [token]);
 
@@ -50,7 +50,7 @@ function Login() {
     return (
         <>
             <Grid container direction="row" alignItems="center" justifyContent="center">
-                <Grid alignItems='center' xs={6}>
+                <Grid xs={6}>
                     <Box paddingX={20}>
                         <form onSubmit={onSubmit}>
                             <Typography variant='h3' gutterBottom color='textPrimary' component='h3' align='center' className='textos1'>Entrar</Typography>

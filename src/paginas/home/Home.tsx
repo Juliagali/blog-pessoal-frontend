@@ -1,10 +1,16 @@
 import React from 'react';
-import {Typography, Grid, Button} from '@material-ui/core';
+import { Typography, Grid, Button } from '@material-ui/core';
 import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 import './Home.css';
+import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useLocalStorage from 'react-use-localstorage';
+
 
 function Home() {
+
     return (
         <>
             <Grid container direction="row" justifyContent="center" alignItems="center" className='caixa'>
@@ -15,6 +21,7 @@ function Home() {
                     </Box>
                     <Box display="flex" justifyContent="center">
                         <Box marginRight={1}>
+                            <ModalPostagem />
                         </Box>
                         <Button variant="outlined" className='botao'>Ver Postagens</Button>
                     </Box>
@@ -31,3 +38,7 @@ function Home() {
 }
 
 export default Home;
+
+function useSelector<T, U>(arg0: (state: any) => any) {
+    throw new Error('Function not implemented.');
+}
