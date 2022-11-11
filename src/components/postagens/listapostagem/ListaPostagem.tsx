@@ -5,15 +5,18 @@ import Tema from '../../../models/Tema';
 import Postagem from '../../../models/Postagem';
 import { Box } from '@mui/system';
 import './ListaPostagem.css';
-import useLocalStorage from 'react-use-localstorage';
 import { useNavigate } from 'react-router-dom';
 import { busca } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 
 function ListaPostagem() {
     const [posts, setPosts] = useState<Postagem[]>([])
-    const [token, setToken] = useLocalStorage('token');
     let history = useNavigate();
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    )
 
     useEffect(() => {
         if (token === '') {

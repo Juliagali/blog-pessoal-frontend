@@ -5,11 +5,24 @@ import { Box } from '@mui/material';
 import './Home.css';
 import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
-
+import { useNavigate, Link } from 'react-router-dom';
+import { TokenState } from '../../store/tokens/tokensReducer';
+import { useSelector } from 'react-redux';
 
 function Home() {
+
+    let navigate = useNavigate();
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    )
+
+    useEffect(() => {
+        if (token === '') {
+            alert('Faça login primeiro')
+            navigate('/login')
+        }
+    }, [token])
+
 
     return (
         <>
@@ -23,7 +36,9 @@ function Home() {
                         <Box marginRight={1}>
                             <ModalPostagem />
                         </Box>
-                        <Button variant="outlined" className='botao'>Ver Postagens</Button>
+                        <Link to="/postagens/all" className='text-decorator-none'>
+                            <Button variant="outlined" className='botao'>Ver Postagens</Button>
+                        </Link>
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
@@ -38,7 +53,3 @@ function Home() {
 }
 
 export default Home;
-
-function useSelector<T, U>(arg0: (state: any) => any) {
-    throw new Error('Function not implemented.');
-}

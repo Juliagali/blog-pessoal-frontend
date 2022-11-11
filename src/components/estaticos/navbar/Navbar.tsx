@@ -1,75 +1,91 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography  } from '@material-ui/core';
-import {Box} from '@mui/material';
-import{Link} from 'react-router-dom';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import './Navbar.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import { addToken } from '../../../store/tokens/actions';
 
 
 
 function Navbar() {
-    const [token, setToken] = useLocalStorage('token');
     let navigate = useNavigate();
+    const dispatch = useDispatch();
 
-function goLogout(){
-    setToken('')
-    alert("Usuário deslogado!")
-    navigate('/login')
-}    
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    )
 
-    return (
-        <>
-            <AppBar position="static">
-                <Toolbar variant="dense">
-                    <Box className='cursor' >
-                        <Typography variant="h5" color="inherit">
-                            Blog Pessoal
-                        </Typography>
-                    </Box>
+    function goLogout() {
+        dispatch(addToken(''));
+        alert("Usuário deslogado!")
+        navigate('/login')
+    }
 
-                    <Box display="flex" justifyContent="start">
-                        <Link to="/Home" className="text-decorator-none">
-                    <Box mx={1} className='cursor' >
+    var navbarComponent;
+
+    if (token !== "") {
+        navbarComponent = <AppBar position="static">
+            <Toolbar variant="dense">
+                <Box className='cursor' >
+                    <Typography variant="h5" color="inherit">
+                        Blog Pessoal
+                    </Typography>
+                </Box>
+
+                <Box display="flex" justifyContent="start">
+                    <Link to="/Home" className="text-decorator-none">
+                        <Box mx={1} className='cursor' >
                             <Typography variant="h6" color="inherit">
                                 home
                             </Typography>
                         </Box>
-                        </Link>
-                        <Link to="/postagens/all" className="text-decorator-none">
+                    </Link>
+                    <Link to="/postagens/all" className="text-decorator-none">
                         <Box mx={1} className='cursor' >
                             <Typography variant="h6" color="inherit">
                                 postagens
                             </Typography>
                         </Box>
-                        </Link>
-                        <Link to="/temas/all" className="text-decorator-none">
+                    </Link>
+                    <Link to="/temas/all" className="text-decorator-none">
                         <Box mx={1} className='cursor' >
                             <Typography variant="h6" color="inherit">
                                 temas
                             </Typography>
                         </Box>
-                        </Link>
-                        <Link to="/formularioTema" className="text-decorator-none">
+                    </Link>
+                    <Link to="/formularioTema" className="text-decorator-none">
                         <Box mx={1} className='cursor' >
                             <Typography variant="h6" color="inherit">
                                 cadastrar tema
                             </Typography>
                         </Box>
-                        </Link>
-                        
-                            <Box mx={1} className='cursor' onClick={goLogout}>
-                                <Typography variant="h6" color="inherit">
-                                    logout
-                                </Typography>
-                            </Box>
-                        
+                    </Link>
+
+                    <Box mx={1} className='cursor' onClick={goLogout}>
+                        <Typography variant="h6" color="inherit">
+                            logout
+                        </Typography>
                     </Box>
 
-                </Toolbar>
-            </AppBar>
+                </Box>
+
+            </Toolbar>
+        </AppBar>
+    }
+
+    return (
+        <>
+            {navbarComponent}
         </>
     )
 }
 
 export default Navbar;
+
+function setToken(arg0: string) {
+    throw new Error('Function not implemented.');
+}
