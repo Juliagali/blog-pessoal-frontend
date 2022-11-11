@@ -43,11 +43,11 @@ function CadastroPost() {
     }
 
     async function buscaTema() {
-        await busca('/temas', setTemas, {
+        await busca("/temas/all", setTemas, {
             headers: {
-                Authorization: token
-            }
-        })
+                Authorization: token,
+            },
+        });
     }
 
     useEffect(() => {
@@ -101,7 +101,7 @@ function CadastroPost() {
     }
 
     function back() {
-        history('/posts')
+        history('/postagens/all')
     }
 
 
