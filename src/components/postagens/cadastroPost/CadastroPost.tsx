@@ -2,6 +2,7 @@ import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, S
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import Tema from '../../../models/Tema'
 import { busca, buscaId, post, put } from '../../../services/Service'
@@ -18,8 +19,16 @@ function CadastroPost() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado pra fazer isso')
-            history('/login')
+            toast.error('você precisa estar logado', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            }); history('/login')
         }
     }, [token])
 
@@ -84,9 +93,27 @@ function CadastroPost() {
                         Authorization: token
                     }
                 })
-                alert('Postagem atualizada com sucesso')
+                toast.success('postagem atualizada com sucesso!', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
             } catch (error) {
-                alert('Falha ao atualizar a postagem')
+                toast.error('falha ao atualizar postagem', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
             }
         } else {
             try {
@@ -95,9 +122,27 @@ function CadastroPost() {
                         Authorization: token
                     }
                 })
-                alert('Postagem cadastrada com sucesso')
+                toast.success('postagem cadastrada com sucesso!', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
             } catch (error) {
-                alert('Falha ao cadastrar a postagem')
+                toast.error('falha ao cadastrar postagem,', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
             }
         }
         back()

@@ -8,6 +8,7 @@ import Tema from "../../../models/Tema";
 import { buscaId, deleteId } from "../../../services/Service";
 import { useSelector } from "react-redux";
 import { TokenState } from "../../../store/tokens/tokensReducer";
+import { toast } from "react-toastify";
 
 function DeletarTema() {
     let navigate = useNavigate();
@@ -24,8 +25,16 @@ function DeletarTema() {
     // Se caso o usuário não estiver logado, ele terá o efeito de dizer que precisa estar logado e vai redirecionar para a tela de login
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado");
-            navigate("/login");
+            toast.error('você precisa estar logado', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });            navigate("/login");
         }
     }, [token]);
 
@@ -53,8 +62,16 @@ function DeletarTema() {
                 Authorization: token,
             },
         });
-        alert("Tema deletado com sucesso!");
-    }
+        toast.success('tema deletado com sucesso!', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });    }
 
     //Nos direcionará para a página temas e manterá o tema
     function nao() {

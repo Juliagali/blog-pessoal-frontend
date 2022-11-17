@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 
 function ListaPostagem() {
@@ -20,8 +21,16 @@ function ListaPostagem() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Faça login primeiro');
-            history('/login');
+            toast.error('você precisa estar logado', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });            history('/login');
         }
     }, [token]);
 

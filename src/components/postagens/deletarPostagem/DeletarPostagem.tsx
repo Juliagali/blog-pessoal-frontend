@@ -9,6 +9,7 @@ import { buscaId, deleteId } from "../../../services/Service";
 import Postagem from "../../../models/Postagem";
 import { useSelector } from "react-redux";
 import { TokenState } from "../../../store/tokens/tokensReducer";
+import { toast } from "react-toastify";
 
 function DeletarPostagem() {
     let navigate = useNavigate();
@@ -25,8 +26,16 @@ function DeletarPostagem() {
     // Se caso o usuário não estiver logado, ele terá o efeito de dizer que precisa estar logado e vai redirecionar para a tela de login
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado");
-            navigate("/login");
+            toast.error('você precisa estar logado', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });            navigate("/login");
         }
     }, [token]);
 
@@ -54,8 +63,16 @@ function DeletarPostagem() {
                 Authorization: token,
             },
         });
-        alert("Postagem deletada com sucesso!");
-    }
+        toast.success('postagem deletada com sucesso', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });    }
 
     //Nos direcionará para a página temas e manterá o tema
     function nao() {
